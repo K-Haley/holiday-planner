@@ -22,6 +22,9 @@ class Validate(models.Manager):
             errors["passwordmatch"] = "Passwords must match"
         if not PASSWORD_REGEX.match(postData['password1']):
             errors["password"] = "Password must be between 4 and 16 characters, and include at least one lowercase, one uppercase and one number"
+        if 'item' in postData:
+            if len(postData['itemname']) < 2:
+                errors["firstname"] = "The item's names must contain at least 2 characters"
         return errors
 
 class Users(models.Model):
@@ -30,6 +33,14 @@ class Users(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = Validate()
+
+class Items(models.Model):
+    item = models.CharField(max_length=255)
+    taken = models.BooleanField(False)
+    userid = models.ForeignKey(Users, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = Validate()
