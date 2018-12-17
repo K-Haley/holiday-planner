@@ -1,3 +1,42 @@
 from django.db import models
+import datetime
 
-# Create your models here.
+class ValidateEvents(models.Manager):
+    def validateEvents(self, postData):
+        errors = {}
+        if 'eventname' in postData:
+            if len(postData['eventname']) < 2:
+                errors["firstname"] = "The name of your event must contain at least 2 characters"
+            if len(postData['eventname']) < 2:
+                errors["firstname"] = "The name of your event must contain at least 2 characters"
+            if postData['eventdate'] == '':
+                errors["noeventdate"] = "You must enter a date for the event"
+            if postData['eventdate'] != '':
+                todaysDate = datetime.datetime.today()
+                userDate = datetime.datetime.strptime(postData['eventdate'], '%Y-%m-%d')
+                if todaysDate <= userDate:
+                    errors["eventdate"] = "Your event must be in the future"
+            if postData['time'] == '':
+                errors["time"] = "You must enter a time for the event"
+        if 'fooditem' in postData:
+             if len(postData['itemname']) < 2:
+                errors["firstname"] = "The item's names must contain at least 2 characters"
+        return errors
+
+class Events(models.Model):
+    event_name = models.CharField(max_length=255)
+    date = models.DateField()
+    time = models.TimeField()
+    desc = models.TextField(max_length=1000)
+    has_food = models.BooleanField()
+    groupid = models.ForeignKey('groups_app.Groups', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = ValidateEvents()
+
+class Foods(models.Model):
+    food_item = models.CharField(max_length=255)
+    eventid = models.ForeignKey(Events, blank=True, null=True, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = ValidateEvents()
