@@ -1,5 +1,7 @@
 from django.db import models
 import re
+import bcrypt
+
 
 class Validate(models.Manager):
     def validate(self, postData):
@@ -22,6 +24,17 @@ class Validate(models.Manager):
             errors["passwordmatch"] = "Passwords must match"
         if not PASSWORD_REGEX.match(postData['password1']):
             errors["password"] = "Password must be between 4 and 16 characters, and include at least one lowercase, one uppercase and one number"
+        return errors
+
+    def login_validator(self, postData):
+        errors = {}
+        user = Users.objects.filter(user_name=postData['username'].lower())
+        if len(user) < 1:
+            errors["wrong"] = "username or password wrong"
+        elif bcrypt.checkpw(postData['password1'].encode(), user[0].password.encode()):
+            print("passwords match")
+        else:
+            errors["wrong"] = "username or password wrong"
         return errors
 
 class Users(models.Model):
