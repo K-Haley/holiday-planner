@@ -2,9 +2,40 @@
 <html>
 <head>
 	<title>Home</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<style type="text/css">
+		.wish, .events, .groups{
+			display: inline-block;
+			vertical-align: top;
+		}
+		.events{
+			margin-right: 100px;
+			margin-left: 100px;
+		}
+		.container{
+			text-align: center;
+
+		}
+	</style>
 </head>
 <body>
-	<h1>You are on the home page {{request.session.name}}</h1>
-	<a href="/logout">Log out</a>
+	<div class="container">
+		<div class="navbar navbar-expand-lg navbar-light bg-light">
+	        <a href="/home" class="topbarbutton">Home</a> | <a href="/creategroup" class="topbarbutton">Create Group</a> | <a href="/mywish" class="topbarbutton">My Wish List</a> | <a href="/calendar/userid" class="topbarbutton">My Calendar</a> | <a href="/logout" class="topbarbutton">Logout</a>
+	    </div>
+
+		<h1>You are on the home page {{request.session.name}}</h1>
+		<div class="wish">
+			<h3>My wish List</h3>
+			<a href="">edit wish list</a>
+		</div>
+		<div class="events">
+			<h3>My Events</h3>
+			<a href="">view calendar</a>
+		</div>
+		<div class="groups">
+			<h3>My Groups</h3>
+		</div>
+	</div>
 </body>
 </html>
