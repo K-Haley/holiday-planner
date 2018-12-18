@@ -30,7 +30,7 @@ class Events(models.Model):
     desc = models.TextField(max_length=1000)
     has_food = models.BooleanField(default=False)
     groupid = models.ForeignKey('groups_app.Groups', on_delete=models.CASCADE)
-    created_by = models.ForeignKey('login_app.Users', default='', on_delete=models.CASCADE)
+    created_by = models.ForeignKey('login_app.Users', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = ValidateEvents()

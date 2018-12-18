@@ -34,9 +34,9 @@
         </div>
 
         <h1>You are on the group info page, {{request.session.name}}</h1>
-        <h4>{{description}}</h4>
-        <div class="list-group">
-            <ul class="list-group">
+        <h4 class="green">{{description}}</h4>
+        <div class="list-group1">
+            <ul class="list-group2">
                 {% if request.session.id == groupowner %}
                 <a class="green" href="/group/{{groupid}}/edit">Edit Group</a>
                 {% endif %}
@@ -48,18 +48,20 @@
           </div>
           <h2>Events:</h2>
           <a href="/group/{{groupid}}/events/add">Add Event</a>
-          <div class="list-group">
-            {% for j in eventlist %}
-                <a href="/group/{{groupid}}/events/{{j.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{j.event_name}}</h5>
-                    <small>{{j.date}} {{j.time}}</small>
-                  </div>
-                  <p class="mb-1">{{j.desc}}</p>
-                  <small></small>
-                </a>
-            {% endfor %}
-              </div>
+          <div class="list-group1">
+                <div class="list-group2">
+                {% for j in eventlist %}
+                    <a href="/group/{{groupid}}/events/{{j.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{j.event_name}}</h5>
+                        <small>{{j.date}} {{j.time}}</small>
+                      </div>
+                      <p class="mb-1">{{j.desc}}</p>
+                      <small></small>
+                    </a>
+                {% endfor %}
+                </div>
+            </div>
 	</div>
 </body>
 </html>

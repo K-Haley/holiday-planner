@@ -6,14 +6,33 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'homestyle.css' %}">
 </head>
 <body>
     <div class="container">
-        <div class="navbar navbar-expand-lg navbar-light bg-light">
-            <a href="/home" class="topbarbutton">Home</a> | <a href="/group/add" class="topbarbutton">Create Group</a> | <a href="/mywish" class="topbarbutton">My Wish List</a> | <a href="/calendar/userid" class="topbarbutton">My Calendar</a> | <a href="/logout" class="topbarbutton">Logout</a>
+        <div class="navbar">
+            <a href="/home" class="green">Home</a> | <a href="/group/add" class="red">Create Group</a> | <a href="/mylist" class="green">My Wish List</a> | <a href="/calendar/userid" class="red">My Calendar</a> | <a href="/logout" class="green">Logout</a>
         </div>
-        <h1>You are on the event info page, {{request.session.name}}</h1>
+        <h1>Event information for {{thisevent.event_name}}</h1>
+        <div class="infobox">
+            <h3 class="green">Who's invited?</h3>
+            {% for user in userlist %}
+                <p class="info">{{user.first_name}} {{user.last_name}}</p>
+            {% endfor %}
+        </div>
+        <div class="infobox">
+            <h3 class="green">When is it?</h3>
+            <p class="info">{{thisevent.date}}</p>
+            <p class="info">{{thisevent.time}}</p>
+        </div>
+        <div class="infobox">
+            <h3 class="green">Description</h3>
+            <p class="info">{{thisevent.desc}}</p>
+        </div>
+
         {% if thisevent.created_by.id == request.session.id %}
+        <p></p>
         <a href="/group/{{groupid}}/events/{{thisevent.id}}/edit">Edit Event</a>
         {% endif %}
 	</div>

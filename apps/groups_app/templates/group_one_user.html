@@ -6,16 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<<<<<<< HEAD
-<style>
-    .taken{
-        text-decoration: line-through;
-    }
-</style>
-=======
+
+
     {% load static %}
     <link rel="stylesheet" href="{% static 'homestyle.css' %}">
->>>>>>> d3af73357c573a3ddcc138f5d4341714b4b7459a
+
 </head>
 <body>
     <div class="container">
@@ -25,14 +20,14 @@
         </div>
 
         <h1>You are on {{this_user.first_name}}'s page</h1>
-        <p>Username: {{this_user.user_name}}</p>
-        <p>First Name: {{this_user.first_name}}</p>
-        <p>Last Name: {{this_user.last_name}}</p>
-        <p>Email: {{this_user.email}}</p>
-        <p>Wishlist:</p>
+        <p class="black">Username: {{this_user.user_name}}</p>
+        <p class="black">First Name: {{this_user.first_name}}</p>
+        <p class="black">Last Name: {{this_user.last_name}}</p>
+        <p class="black">Email: {{this_user.email}}</p>
+        <p class="green">Wishlist:</p>
         {% for i in wishlist %}
         {% if i.taken == False %}
-        <p class="untaken">{{i.item}} <a href="/group/{{groupid}}/{{userid}}/take/{{i.id}}">I got this!</a></p>
+        <p class="untaken">{{i.item}} <a class="got" href="/group/{{groupid}}/{{userid}}/take/{{i.id}}">I got this!</a></p>
         {% endif %}
         {% endfor %}
         {% for j in wishlist %}

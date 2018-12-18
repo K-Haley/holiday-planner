@@ -7,9 +7,12 @@ Groups = apps.get_model('groups_app', 'Groups')
 Users = apps.get_model('login_app', 'Users')
 
 def eventInfo(request, gid, eid):
+    group=Groups.objects.get(id=gid)
+    
     context = {
         'groupid' : gid,
         'thisevent' : Events.objects.get(id=eid),
+        'userlist' : Users.objects.filter(groups__id=gid),
     }
     return render(request, 'event_info.html', context)
 def addEvent(request, gid):
