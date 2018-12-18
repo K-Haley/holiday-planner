@@ -10,7 +10,7 @@ class ValidateGroups(models.Manager):
 
 class Groups(models.Model):
     group_name = models.CharField(max_length=255)
-    members = models.ManyToManyField('login_app.Users', on_delete=models.CASCADE)
+    members = models.ManyToManyField('login_app.Users')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = ValidateGroups()

@@ -8,4 +8,7 @@ urlpatterns = [
     path('register', views.register),
     path('home', views.home),
     path('logout', views.logout),
+    path('mylist', views.mylist),
+    path('add', views.add),
+    path('delete/<int:itemid>', views.delete),
 ]
