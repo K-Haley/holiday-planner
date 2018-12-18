@@ -50,3 +50,8 @@ span{
 	display: inline-block;
 	width: 150px;
 }
+.black{
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+}

@@ -9,21 +9,25 @@ Items = apps.get_model('login_app', 'Items')
 def groupInfo(request, gid):
     this_group = Groups.objects.get(id=gid)
     owner = this_group.group_owner
+    group_name = this_group.group_name
     context = {
         'userlist' : Users.objects.filter(groups__id=gid),
         'groupowner' : owner.id,
         'eventlist' : Events.objects.filter(groupid__id=gid),
         'groupid' : gid,
+        'group_name': group_name,
     }
     return render(request, 'group_info.html', context)
 def editGroup(request, gid):
     this_group = Groups.objects.get(id=gid)
     owner = this_group.group_owner
+    group_name = this_group.group_name
     context = {
         'userlist' : Users.objects.filter(groups__id=gid),
         'groupowner' : owner.id,
         'eventlist' : Events.objects.filter(groupid__id=gid),
         'groupid' : gid,
+        'group_name': group_name,
     }
     return render(request, 'edit_group.html', context)
 def removeUser(request, gid, uid):

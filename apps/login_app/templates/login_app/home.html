@@ -32,6 +32,10 @@
 		</div>
 		<div class="groups">
 			<h3>My Groups</h3>
+			{% for group in mygroups %}
+				<a class="black" href="/group/{{group.id}}">{{group.group_name}}</a>
+				<p></p>
+			{% endfor %}
 		</div>
 		
 	</div>

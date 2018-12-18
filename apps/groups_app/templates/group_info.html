@@ -6,24 +6,38 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'homestyle.css' %}">
 <style>
-    .list-group{
+    /*.list-group{
         width: 400px;
         margin-left: 50px;
+    }*/
+    .list-group2{
+        margin: 0px;
+        padding: 0px;
+
+        width: 400px;
+        display: inline-block;
+    }
+    .list-group1{
+        text-align: center;
+        margin: 0px;
+        padding: 0px;
     }
 </style>
 </head>
 <body>
     <div class="container">
-        <div class="navbar navbar-expand-lg navbar-light bg-light">
-            <a href="/home" class="topbarbutton">Home</a> | <a href="/group/add" class="topbarbutton">Create Group</a> | <a href="/mywish" class="topbarbutton">My Wish List</a> | <a href="/calendar/userid" class="topbarbutton">My Calendar</a> | <a href="/logout" class="topbarbutton">Logout</a>
+        <div class="navbar">
+            <a href="/home" class="green">Home</a> | <a href="/group/add" class="red">Create Group</a> | <a href="/mylist" class="green">My Wish List</a> | <a href="/calendar/userid" class="red">My Calendar</a> | <a href="/logout" class="green">Logout</a>
         </div>
 
-        <h1>You are on the group info page, {{request.session.name}}</h1>
-        <div class="list-group">
-            <ul class="list-group">
+        <h1>You are on the {{group_name}} group info page, {{request.session.name}}</h1>
+        <div class="list-group1">
+            <ul class="list-group2">
                 {% if request.session.id == groupowner %}
-                <a href="/group/{{groupid}}/edit">Edit Group</a>
+                <a class="green" href="/group/{{groupid}}/edit">Edit Group</a>
                 {% endif %}
                 {% for i in userlist %}
                 <li class="list-group-item"><a href={% if i.id != request.session.id %}"/group/{{groupid}}/{{i.id}}"{% endif %}{% if request.session.id == i.id %}"/home"{% endif %}>{{i.first_name}} {{i.last_name}}</a> <a href="/group/{{groupid}}/{{i.id}}"></a></li>
@@ -31,7 +45,7 @@
                 <li class="list-group-item"><form action="/group/{{groupid}}/invite" method="post">{% csrf_token %}<input type="text" name="inviteuser"><input type="submit" value="Invite!"></form></li>
             </ul>
           </div>
-          <div class="list-group">
+          <div class="list-group1">
             {% for j in eventlist %}
                 <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                   <div class="d-flex w-100 justify-content-between">
