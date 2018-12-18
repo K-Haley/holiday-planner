@@ -13,7 +13,20 @@
             <a href="/home" class="topbarbutton">Home</a> | <a href="/group/add" class="topbarbutton">Create Group</a> | <a href="/mywish" class="topbarbutton">My Wish List</a> | <a href="/calendar/userid" class="topbarbutton">My Calendar</a> | <a href="/logout" class="topbarbutton">Logout</a>
         </div>
 
-		<h1>You are on another user's page, {{request.session.name}}</h1>
+        <h1>You are on the add group page, {{request.session.name}}</h1>
+        <form action="/group/create/" method="post">
+            {% csrf_token %}
+            <p>Group Name:</p>
+            <input type="text" name="groupname">
+            <p>Description(optional):</p>
+            <textarea name="groupdesc"\ cols="30" rows="10"></textarea>
+            <input type="submit" value="Create Group!">
+        </form>
+    {% if messages %}
+    	{% for message in messages %}
+        	<p class="message">{{ message }}</p>
+    	{% endfor %}
+	{% endif %}
 	</div>
 </body>
 </html>
