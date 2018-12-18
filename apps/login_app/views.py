@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Users
+from .models import Users, Items
 import bcrypt
 
 def index(request):
@@ -17,13 +17,6 @@ def login(request):
 	request.session['id'] = user[0].id
 	request.session['name'] = user[0].first_name
 	return redirect('/home')
-
-
-
-
-
-
-
 
 def signup(request):
 	return render(request, 'login_app/signup.html')
@@ -43,9 +36,33 @@ def register(request):
 
 def home(request):
 	if 'id' in request.session:
-		return render(request, 'login_app/home.html')
+		mylist = Items.objects.filter(userid=request.session['id'])
+		context={
+			"mylist": mylist
+		}
+		return render(request, 'login_app/home.html', context)
 	else:
 		return redirect('/')
+
+
+
+def mylist(request):
+	mylist = Items.objects.filter(userid=request.session['id'])
+	print(mylist[0].item)
+	context={
+		"mylist": mylist
+	}
+	return render(request, 'login_app/mylist.html', context)
+
+def add(request):
+	Items.objects.create(item=request.POST['item'], userid=Users.objects.get(id=request.POST['userid']))
+	return redirect('/mylist')
+
+def delete(request, itemid):
+	Items.objects.get(id=itemid).delete()
+	return redirect('/mylist')
+
+
 
 
 def logout(request):
