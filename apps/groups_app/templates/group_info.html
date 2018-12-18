@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<style>
+    .list-group{
+        width: 400px;
+        margin-left: 50px;
+    }
+</style>
 </head>
 <body>
     <div class="container">
@@ -13,7 +19,26 @@
             <a href="/home" class="topbarbutton">Home</a> | <a href="/creategroup" class="topbarbutton">Create Group</a> | <a href="/mywish" class="topbarbutton">My Wish List</a> | <a href="/calendar/userid" class="topbarbutton">My Calendar</a> | <a href="/logout" class="topbarbutton">Logout</a>
         </div>
 
-		<h1>You are on the group info page, {{request.session.name}}</h1>
+        <h1>You are on the group info page, {{request.session.name}}</h1>
+        <div class="list-group">
+            <ul class="list-group">
+                {% for i in userlist %}
+                <li class="list-group-item">{{i.first_name}} {{i.last_name}} <a href="/group/{{groupid}}/{{i.id}}"></a></li>
+                {% endfor %}
+            </ul>
+          </div>
+          <div class="list-group">
+            {% for j in eventlist %}
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{j.event_name}}</h5>
+                    <small>{{j.date}} {{j.time}}</small>
+                  </div>
+                  <p class="mb-1">{{j.desc}}</p>
+                  <small><a href="group/{{groupid}}/events/{{j.id}}"></a></small>
+                </a>
+            {% endfor %}
+              </div>
 	</div>
 </body>
 </html>

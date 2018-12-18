@@ -5,4 +5,5 @@ urlpatterns = [
     path('<int:eid>', views.eventInfo),
     path('add', views.addEvent),
     path('<int:eid>/edit', views.editEvent),
+    path('<int:eid>/delete', views.deleteEvent),
 ]
