@@ -20,6 +20,7 @@
         </div>
 
         <h1>You are on the group info page, {{request.session.name}}</h1>
+        <h4>{{description}}</h4>
         <div class="list-group">
             <ul class="list-group">
                 {% if request.session.id == groupowner %}
@@ -31,15 +32,17 @@
                 <li class="list-group-item"><form action="/group/{{groupid}}/invite" method="post">{% csrf_token %}<input type="text" name="inviteuser"><input type="submit" value="Invite!"></form></li>
             </ul>
           </div>
+          <h2>Events:</h2>
+          <a href="/group/{{groupid}}/events/add">Add Event</a>
           <div class="list-group">
             {% for j in eventlist %}
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <a href="/group/{{groupid}}/events/{{j.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
                   <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{j.event_name}}</h5>
                     <small>{{j.date}} {{j.time}}</small>
                   </div>
                   <p class="mb-1">{{j.desc}}</p>
-                  <small><a href="group/{{groupid}}/events/{{j.id}}"></a></small>
+                  <small></small>
                 </a>
             {% endfor %}
               </div>

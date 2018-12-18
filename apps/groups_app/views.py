@@ -12,6 +12,7 @@ def groupInfo(request, gid):
     context = {
         'userlist' : Users.objects.filter(groups__id=gid),
         'groupowner' : owner.id,
+        'description' : this_group.group_desc,
         'eventlist' : Events.objects.filter(groupid__id=gid),
         'groupid' : gid,
     }
@@ -40,9 +41,16 @@ def groupInvite(request, gid):
 def groupOneUser(request, gid, uid):
     context = {
         'this_user' : Users.objects.get(id=uid),
-        'wishlist' : Items.objects.filter(userid__id=uid)
+        'wishlist' : Items.objects.filter(userid__id=uid),
+        'userid' : uid,
+        'groupid' : gid,
     }
     return render(request, 'group_one_user.html', context)
+def take(request, gid, uid, iid):
+    this_item = Items.objects.get(id=iid)
+    this_item.taken = True
+    this_item.save()
+    return redirect(f'/group/{gid}/{uid}')
 def addGroup(request):
     return render(request, 'add_group.html')
 def createGroup(request):

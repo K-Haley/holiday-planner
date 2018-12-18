@@ -14,6 +14,27 @@
 	    </div>
 
 		<h1>You are on the add event page, {{request.session.name}}</h1>
+		<form action="/group/{{groupid}}/events/create" method="post">
+		{% csrf_token %}
+		<p>Name:</p>
+		<input type="text" name="eventname">
+		<p>Date:</p>
+		<input type="date" name="eventdate">
+		<p>Time:</p>
+		<input type="time" name="eventtime">
+		<p>Description:</p>
+		<textarea name="eventdesc" cols="30" rows="10"></textarea>
+		<br>
+		<label for="hasfood">Are people bringing food?</label>
+		<input type="checkbox" name="hasfood">
+		<br>
+		<input type="submit" value="Create Event">
+		</form>
+	{% if messages %}
+    	{% for message in messages %}
+        	<p class="message">{{ message }}</p>
+    	{% endfor %}
+	{% endif %}
 	</div>
 </body>
 </html>

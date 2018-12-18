@@ -6,18 +6,18 @@ class ValidateEvents(models.Manager):
         errors = {}
         if 'eventname' in postData:
             if len(postData['eventname']) < 2:
-                errors["firstname"] = "The name of your event must contain at least 2 characters"
-            if len(postData['eventname']) < 2:
-                errors["firstname"] = "The name of your event must contain at least 2 characters"
+                errors["eventname"] = "The name of your event must contain at least 2 characters"
+            if len(postData['eventdesc']) < 10:
+                errors["eventdesc"] = "Your event description must contain at least 10 characters"
             if postData['eventdate'] == '':
                 errors["noeventdate"] = "You must enter a date for the event"
             if postData['eventdate'] != '':
                 todaysDate = datetime.datetime.today()
                 userDate = datetime.datetime.strptime(postData['eventdate'], '%Y-%m-%d')
-                if todaysDate <= userDate:
+                if todaysDate >= userDate:
                     errors["eventdate"] = "Your event must be in the future"
-            if postData['time'] == '':
-                errors["time"] = "You must enter a time for the event"
+            if postData['eventtime'] == '':
+                errors["eventtime"] = "You must enter a time for the event"
         if 'fooditem' in postData:
              if len(postData['itemname']) < 2:
                 errors["firstname"] = "The item's names must contain at least 2 characters"
@@ -28,8 +28,9 @@ class Events(models.Model):
     date = models.DateField()
     time = models.TimeField()
     desc = models.TextField(max_length=1000)
-    has_food = models.BooleanField()
+    has_food = models.BooleanField(default=False)
     groupid = models.ForeignKey('groups_app.Groups', on_delete=models.CASCADE)
+    created_by = models.ForeignKey('login_app.Users', default='', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = ValidateEvents()

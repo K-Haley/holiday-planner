@@ -48,7 +48,6 @@ def home(request):
 
 def mylist(request):
 	mylist = Items.objects.filter(userid=request.session['id'])
-	print(mylist[0].item)
 	context={
 		"mylist": mylist
 	}
