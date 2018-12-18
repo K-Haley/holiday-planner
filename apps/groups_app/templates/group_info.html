@@ -16,15 +16,19 @@
 <body>
     <div class="container">
         <div class="navbar navbar-expand-lg navbar-light bg-light">
-            <a href="/home" class="topbarbutton">Home</a> | <a href="/creategroup" class="topbarbutton">Create Group</a> | <a href="/mywish" class="topbarbutton">My Wish List</a> | <a href="/calendar/userid" class="topbarbutton">My Calendar</a> | <a href="/logout" class="topbarbutton">Logout</a>
+            <a href="/home" class="topbarbutton">Home</a> | <a href="/group/add" class="topbarbutton">Create Group</a> | <a href="/mywish" class="topbarbutton">My Wish List</a> | <a href="/calendar/userid" class="topbarbutton">My Calendar</a> | <a href="/logout" class="topbarbutton">Logout</a>
         </div>
 
         <h1>You are on the group info page, {{request.session.name}}</h1>
         <div class="list-group">
             <ul class="list-group">
+                {% if request.session.id == groupowner %}
+                <a href="/group/{{groupid}}/edit">Edit Group</a>
+                {% endif %}
                 {% for i in userlist %}
-                <li class="list-group-item">{{i.first_name}} {{i.last_name}} <a href="/group/{{groupid}}/{{i.id}}"></a></li>
+                <li class="list-group-item"><a href={% if i.id != request.session.id %}"/group/{{groupid}}/{{i.id}}"{% endif %}{% if request.session.id == i.id %}"/home"{% endif %}>{{i.first_name}} {{i.last_name}}</a> <a href="/group/{{groupid}}/{{i.id}}"></a></li>
                 {% endfor %}
+                <li class="list-group-item"><form action="/group/{{groupid}}/invite" method="post">{% csrf_token %}<input type="text" name="inviteuser"><input type="submit" value="Invite!"></form></li>
             </ul>
           </div>
           <div class="list-group">
