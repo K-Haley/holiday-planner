@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Users, Items
 import bcrypt
+from django.apps import apps
+Groups = apps.get_model('groups_app', 'Groups')
 
 def index(request):
 	return render(request, 'login_app/index.html')
@@ -37,8 +39,12 @@ def register(request):
 def home(request):
 	if 'id' in request.session:
 		mylist = Items.objects.filter(userid=request.session['id'])
+		print(Groups.objects.all().values())
+		mygroups = Groups.objects.filter(members=request.session['id'])
+		print(mygroups)
 		context={
-			"mylist": mylist
+			"mylist": mylist,
+			"mygroups": mygroups
 		}
 		return render(request, 'login_app/home.html', context)
 	else:
