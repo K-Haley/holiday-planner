@@ -1,0 +1,16 @@
+
+.wish, .events, .groups{
+	display: inline-block;
+	vertical-align: top;
+}
+.events{
+	margin-right: 100px;
+	margin-left: 100px;
+}
+.container{
+	text-align: center;
+
+}
+h1{
+	color: red;
+}

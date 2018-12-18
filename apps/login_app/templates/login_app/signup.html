@@ -3,30 +3,52 @@
 <head>
 	<title>Welcom</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'homestyle.css' %}">
 </head>
 <body>
-	<h1>Welcome to the Ulitimate Holiday Planner!</h1>
-	<form action="/register" method="POST">
-		{% csrf_token %}
-		First Name: <input type="text" name="fname">
-		<p></p>
-		Last Name:<input type="text" name="lname">
-		<p></p>
-		Username<input type="text" name="username">
-		<p></p>
-		Email<input type="text" name="email">
-		<p></p>
-		Password<input type="password" name="password1">
-		<p></p>
-		Confirm password<input type="password" name="password2">
-		<p></p>
-		<button type="submit">submit</button>
-	</form>
-	{% if messages %}
-    	{% for message in messages %}
-        	<p class="message">{{ message }}</p>
-    	{% endfor %}
-	{% endif %}
+	<div class="container">
+		<h1 class="inline">Welcome to the Ulitimate Holiday Planner!</h1>
+		<a class="green" href="/">login</a>
+		<form class="reg" action="/register" method="POST">
+			{% csrf_token %}
+			<div class="spacer">
+				First Name: 
+			</div>
+			<input type="text" name="fname">
+			<p></p>
+			<div class="spacer">
+				Last Name:
+			</div>
+			<input type="text" name="lname">
+			<p></p>
+			<div class="spacer">
+				Username
+			</div>
+			<input type="text" name="username">
+			<p></p>
+			<div class="spacer">
+				Email
+			</div>
+			<input type="text" name="email">
+			<p></p>
+			<div class="spacer">
+				Password
+			</div>
+			<input type="password" name="password1">
+			<p></p>
+			<div class="spacer">
+				Confirm password
+			</div>
+			<input type="password" name="password2">
+			<p></p>
+			<button type="submit">submit</button>
+		</form>
+		{% if messages %}
+	    	{% for message in messages %}
+	        	<p class="message">{{ message }}</p>
+	    	{% endfor %}
+		{% endif %}
+	</div>
 </body>
 </html>

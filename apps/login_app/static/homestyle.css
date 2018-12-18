@@ -1,0 +1,52 @@
+.wish, .events, .groups{
+	display: inline-block;
+	vertical-align: top;
+}
+.inline{
+	display: inline-block;
+}
+.events{
+	margin-right: 200px;
+	margin-left: 200px;
+
+}
+.events, .wish, .groups{
+	margin-top: 100px;
+}
+.container{
+	text-align: center;
+
+}
+h1, .red, p{
+	color: red;
+	font-weight: bold;
+}
+h3, .green{
+	color: green;
+	font-weight: bold;
+}
+body { 
+	background: url('snow.jpg') no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	}
+.navbar{
+	margin-bottom: 50px;
+}
+span{
+	font-weight: bold;
+}
+.remove{
+	color: red;
+}
+
+.top, .welcome, h4, .reg{
+	margin-top: 50px;
+}
+
+.spacer{
+	display: inline-block;
+	width: 150px;
+}

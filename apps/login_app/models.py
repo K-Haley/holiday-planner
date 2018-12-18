@@ -12,6 +12,9 @@ class Validate(models.Manager):
         for i in x:
             if i.email == postData['email']:
                 errors["emailUnique"] = "Email has already been used"
+        for j in x:
+            if j.user_name == postData['username']:
+                errors["usernameUnique"] = "username has already been used"
         if not EMAIL_REGEX.match(postData['email']):
             errors["email"] = "Please enter a valid email address: example@example.com"
         if len(postData['fname']) < 2:
