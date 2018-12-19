@@ -16,6 +16,7 @@
         margin-left: -2px;
         text-align: center;
         vertical-align: top;
+        background-color: #e3e8f0;
     }
     .calendar{
         text-align: left;
@@ -41,7 +42,7 @@
                 <p>{{i}}</p>
                 {% for k in myevents %}
                     {% if k.date == i %}
-                    <a href="/group/{{k.groupid.id}}/events/{{k.id}}">{{k.event_name}}</a>
+                    <a class="green" href="/group/{{k.groupid.id}}/events/{{k.id}}">{{k.event_name}}</a>
                     {% endif %}
                 {% endfor %}
             </div>

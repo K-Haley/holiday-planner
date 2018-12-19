@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <div class="navbar">
-            <a href="/home" class="green">Home</a> | <a href="/group/add" class="red">Create Group</a> | <a href="/mylist" class="green">My Wish List</a> | <a href="/calendar/userid" class="red">My Calendar</a> | <a href="/logout" class="green">Logout</a>
+            <a href="/home" class="green">Home</a> | <a href="/group/add" class="red">Create Group</a> | <a href="/mylist" class="green">My Wish List</a> | <a href="/calendar/{{request.session.id}}" class="red">My Calendar</a> | <a href="/logout" class="green">Logout</a>
         </div>
         <h1>Event information for {{thisevent.event_name}}</h1>
         <div class="infobox">

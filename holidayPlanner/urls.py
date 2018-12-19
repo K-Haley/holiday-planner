@@ -23,4 +23,5 @@ urlpatterns = [
     path('calendar/', include('apps.calendar_app.urls')),
     path('group/', include('apps.groups_app.urls')),
     path('group/<int:gid>/events/', include('apps.events_app.urls')),
+    path('chat/', include('apps.chat.urls')),
 ]
