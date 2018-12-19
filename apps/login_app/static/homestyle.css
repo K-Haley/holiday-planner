@@ -20,10 +20,12 @@
 h1, .red{
 	color: red;
 	font-weight: bold;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 h3, .green, .untaken{
 	color: green;
 	font-weight: bold;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 body { 
 	background: url('snow.jpg') no-repeat center center fixed; 
@@ -58,6 +60,9 @@ span{
 .taken{
     text-decoration: line-through;
     color: red;
+}
+.untaken{
+	font-size: 20px;
 }
 .got{
 	font-size: 12px;

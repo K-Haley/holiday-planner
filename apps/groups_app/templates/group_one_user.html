@@ -24,7 +24,7 @@
         <p class="black">First Name: {{this_user.first_name}}</p>
         <p class="black">Last Name: {{this_user.last_name}}</p>
         <p class="black">Email: {{this_user.email}}</p>
-        <p class="green">Wishlist:</p>
+        <h3 class="green">Wishlist:</h3>
         {% for i in wishlist %}
         {% if i.taken == False %}
         <p class="untaken">{{i.item}} <a class="got" href="/group/{{groupid}}/{{userid}}/take/{{i.id}}">I got this!</a></p>
