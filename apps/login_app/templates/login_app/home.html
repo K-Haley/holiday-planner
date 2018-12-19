@@ -28,7 +28,9 @@
 		</div>
 		<div class="events">
 			<h3>My Events</h3>
-			<a class="red" href="">view calendar</a>
+			{% for event in myevents %}
+			<a class="black" href="/group/{{event.groupid.id}}/events/{{event.id}}">{{event.event_name}}<br>{{event.date}} | {{event.time}}</a>
+			{% endfor %}
 		</div>
 		<div class="groups">
 			<h3>My Groups</h3>

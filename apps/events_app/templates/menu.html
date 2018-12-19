@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'homestyle.css' %}"> 
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="/home" class="green">Home</a> | <a href="/group/add" class="red">Create Group</a> | <a href="/mylist" class="green">My Wish List</a> | <a href="/calendar/userid" class="red">My Calendar</a> | <a href="/logout" class="green">Logout</a>
+        </div>
+
+        <h1>View and add menu items here, {{request.session.name}}</h1>
+        {% for i in menuitems %}
+        <p class="green">{{i.brought_by.first_name}} {{i.brought_by.last_name}} - {{i.food_item}}</p>
+        {% endfor %}
+        <form action="/group/{{groupid}}/events/{{eventid}}/menu/add" method="post">
+            {% csrf_token %}
+            <input type="text" name="foodname">
+            <p></p>
+            <input type="submit" value="Add Item">
+        </form>
+        <p></p>
+        {% if thisevent.created_by.id == request.session.id %}
+        <a href="/group/{{groupid}}/events/{{eventid}}/menu/edit">Edit Menu</a>
+        {% endif %}
+    {% if messages %}
+    	{% for message in messages %}
+        	<p class="message">{{ message }}</p>
+    	{% endfor %}
+	{% endif %}
+	</div>
+</body>
+</html>

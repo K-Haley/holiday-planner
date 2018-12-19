@@ -6,16 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<<<<<<< HEAD
 <style>
     .taken{
         text-decoration: line-through;
     }
 </style>
-=======
     {% load static %}
     <link rel="stylesheet" href="{% static 'homestyle.css' %}">
->>>>>>> d3af73357c573a3ddcc138f5d4341714b4b7459a
 </head>
 <body>
     <div class="container">
@@ -40,6 +37,8 @@
         <p class="taken">{{j.item}}</p>
         {% endif %}
         {% endfor %}
+        <br>
+        <a href="/group/{{groupid}}">Back to Group</a>
 	</div>
 </body>
 </html>

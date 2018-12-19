@@ -63,14 +63,32 @@ def deleteEvent(request, gid, eid):
     }
     return redirect(f"/group/{gid}", context)
 def menu(request, gid, eid):
+    this_event = Events.objects.get(id=eid)
     context = {
         'groupid' : gid,
+        'eventid' : eid,
+        'menuitems' : Foods.objects.filter(eventid=this_event),
+        'thisevent' : this_event,
     }
     return render(request, 'menu.html', context)
 def editMenu(request, gid, eid):
+    this_event = Events.objects.get(id=eid)
     context = {
         'groupid' : gid,
+        'eventid' : eid,
+        'menuitems' : Foods.objects.filter(eventid=this_event),
+        'thisevent' : this_event,
     }
-    return render(request, 'editMenu.html', context)
-def updateMenu(request, gid, eid):
+    return render(request, 'edit_menu.html', context)
+def addToMenu(request, gid, eid):
+    errors = Foods.objects.validateEvents(request.POST)
+    if len(errors) > 0:
+	    for key, value in errors.items():
+		    messages.error(request, value)
+		    return redirect(f'/group/{gid}/events/{eid}/menu')
+    Foods.objects.create(food_item=request.POST['foodname'], eventid=Events.objects.get(id=eid), brought_by=Users.objects.get(id=request.session['id']))
     return redirect(f'/group/{gid}/events/{eid}/menu')
+def updateMenu(request, gid, eid, fid):
+    this_food = Foods.objects.get(id=fid)
+    this_food.delete()
+    return redirect(f'/group/{gid}/events/{eid}/menu/edit')

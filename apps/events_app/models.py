@@ -18,9 +18,9 @@ class ValidateEvents(models.Manager):
                     errors["eventdate"] = "Your event must be in the future"
             if postData['eventtime'] == '':
                 errors["eventtime"] = "You must enter a time for the event"
-        if 'fooditem' in postData:
-             if len(postData['itemname']) < 2:
-                errors["firstname"] = "The item's names must contain at least 2 characters"
+        if 'foodname' in postData:
+             if len(postData['foodname']) < 2:
+                errors["foodname"] = "The item's names must contain at least 2 characters"
         return errors
 
 class Events(models.Model):
@@ -30,7 +30,7 @@ class Events(models.Model):
     desc = models.TextField(max_length=1000)
     has_food = models.BooleanField(default=False)
     groupid = models.ForeignKey('groups_app.Groups', on_delete=models.CASCADE)
-    created_by = models.ForeignKey('login_app.Users', default='', on_delete=models.CASCADE)
+    created_by = models.ForeignKey('login_app.Users', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = ValidateEvents()
@@ -38,6 +38,7 @@ class Events(models.Model):
 class Foods(models.Model):
     food_item = models.CharField(max_length=255)
     eventid = models.ForeignKey(Events, blank=True, null=True, on_delete=models.CASCADE)
+    brought_by = models.ForeignKey('login_app.Users', default='', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = ValidateEvents()
