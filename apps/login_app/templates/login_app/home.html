@@ -30,6 +30,7 @@
 			<h3>My Events</h3>
 			{% for event in myevents %}
 			<a class="black" href="/group/{{event.groupid.id}}/events/{{event.id}}">{{event.event_name}}<br>{{event.date}} | {{event.time}}</a>
+			<p></p>
 			{% endfor %}
 		</div>
 		<div class="groups">
