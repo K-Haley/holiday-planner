@@ -17,11 +17,11 @@
 	text-align: center;
 
 }
-h1, .red, p{
+h1, .red{
 	color: red;
 	font-weight: bold;
 }
-h3, .green{
+h3, .green, .untaken{
 	color: green;
 	font-weight: bold;
 }
@@ -55,3 +55,22 @@ span{
 	color: black;
 	font-weight: bold;
 }
+.taken{
+    text-decoration: line-through;
+    color: red;
+}
+.got{
+	font-size: 12px;
+	color: red;
+}
+.infobox{
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	width: 300px;
+}
+.info{
+	font-weight: bold;
+}
+
+
