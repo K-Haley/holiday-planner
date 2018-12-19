@@ -38,7 +38,7 @@ class Events(models.Model):
 class Foods(models.Model):
     food_item = models.CharField(max_length=255)
     eventid = models.ForeignKey(Events, blank=True, null=True, on_delete=models.CASCADE)
-    brought_by = models.ForeignKey('login_app.Users', default='', on_delete=models.CASCADE)
+    brought_by = models.ForeignKey('login_app.Users', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = ValidateEvents()
