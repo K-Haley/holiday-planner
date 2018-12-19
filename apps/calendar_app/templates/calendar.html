@@ -1,21 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'calendar_app/css/style.css' %}"> 
+	<title>Home</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'homestyle.css' %}"> 
+    <style type="text/css">
+    .day{
+        height: 150px;
+        width: 150px;
+        border: 2px solid black;
+        display: inline-block;
+        margin: 2px;
+        margin-left: -2px;
+        text-align: center;
+        vertical-align: top;
+    }
+    .calendar{
+        text-align: left;
+        vertical-align: top;
+    }
+	</style>
 </head>
 <body>
-    <div class="container">
-        <div class="navbar navbar-expand-lg navbar-light bg-light">
-            <a href="/home" class="topbarbutton">Home</a> | <a href="/group/add" class="topbarbutton">Create Group</a> | <a href="/mywish" class="topbarbutton">My Wish List</a> | <a href="/calendar/userid" class="topbarbutton">My Calendar</a> | <a href="/logout" class="topbarbutton">Logout</a>
-        </div>
+	<div class="container">
 
-		<h1>You are on the calendar page, {{request.session.name}}</h1>
+		<div class="navbar">
+	        <a href="/home" class="green">Home</a> | <a href="/group/add" class="red">Create Group</a> | <a href="/mylist" class="green">My Wish List</a> | <a href="/calendar/{{request.session.id}}" class="red">My Calendar</a> | <a href="/logout" class="green">Logout</a>
+	    </div>
+
+        <h1>Welcome to your Calendar, {{request.session.name}}</h1>
+            <div class="calendar">
+            {% for i in iterations %}
+            <div class="day"></div>
+            {% endfor %}
+            {% for i, j in dates.datedays %}
+            <div class="day">
+                <p>{{i}}</p>
+                {% for k in myevents %}
+                    {% if k.date == i %}
+                    <a href="/group/{{k.groupid.id}}/events/{{k.id}}">{{k.event_name}}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
 	</div>
 </body>
 </html>
