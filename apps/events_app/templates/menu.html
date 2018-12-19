@@ -19,12 +19,21 @@
         {% for i in menuitems %}
         <p class="green">{{i.brought_by.first_name}} {{i.brought_by.last_name}} - {{i.food_item}}</p>
         {% endfor %}
+        {% if thisevent.has_food == True %}
         <form action="/group/{{groupid}}/events/{{eventid}}/menu/add" method="post">
             {% csrf_token %}
             <input type="text" name="foodname">
             <p></p>
             <input type="submit" value="Add Item">
         </form>
+        {% elif thisevent.created_by.id == request.session.id %}
+        <form action="/group/{{groupid}}/events/{{eventid}}/menu/add" method="post">
+            {% csrf_token %}
+            <input type="text" name="foodname">
+            <p></p>
+            <input type="submit" value="Add Item">
+        </form>
+        {% endif %}
         <p></p>
         {% if thisevent.created_by.id == request.session.id %}
         <a href="/group/{{groupid}}/events/{{eventid}}/menu/edit">Edit Menu</a>
