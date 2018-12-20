@@ -32,9 +32,9 @@
         </div>
         <p></p>
         {% if thisevent.created_by.id == request.session.id %}
-        <a href="/group/{{groupid}}/events/{{thisevent.id}}/edit">Edit Event</a>
+        <a class="green" href="/group/{{groupid}}/events/{{thisevent.id}}/edit">Edit Event</a>
         {% endif %}
-        <a href="/group/{{groupid}}/events/{{thisevent.id}}/menu">View Menu</a>
+        <a class="red" href="/group/{{groupid}}/events/{{thisevent.id}}/menu">View Menu</a>
 	</div>
 </body>
 </html>
