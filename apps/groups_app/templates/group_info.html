@@ -72,7 +72,7 @@
                 {% for i in userlist %}   
                     <li class="list-group-item"><a class="green"  href={% if i.id != request.session.id %}"/group/{{groupid}}/{{i.id}}"{% endif %}{% if request.session.id == i.id %}"/home"{% endif %}>{{i.first_name}} {{i.last_name}}</a> </li>
                 {% endfor %}
-                <li class="list-group-item"><form action="/group/{{groupid}}/invite" method="post" autocomplete=off id="inviteform">{% csrf_token %}<input type="text" name="inviteuser" id="invitebox"><div id="searchresults"></div></input><input type="submit" value="Invite!"></form></li>
+                <li class="list-group-item"><form action="/group/{{groupid}}/invite" method="post" autocomplete=off id="inviteform">{% csrf_token %}<input class="textinputeffects" type="text" name="inviteuser" id="invitebox"><div id="searchresults"></div></input><input class="submiteffects" type="submit" value="Invite!"></form></li>
             </ul>
           </div>
           <h2 class="green">Events:</h2>

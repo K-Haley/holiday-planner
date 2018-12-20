@@ -128,12 +128,18 @@ textarea:focus{
 	width: 20px;
 }
 .pmessages{
-	height: 250px;
-	width: 350px;
+	height: 200px;
+	width: 500px;
 	word-wrap: break-word;
 	display: inline-block;
+	overflow: scroll;
+	border-top: 1px solid black;
+	border-bottom: : 1px solid black;
+	border-radius: 10px;
+
 }
 .messageborder{
 	border: 1px solid black;
 	border-radius: 10px;
+	background-color: #2a601f5c;
 }
