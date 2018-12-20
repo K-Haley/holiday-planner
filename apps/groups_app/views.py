@@ -15,7 +15,9 @@ def groupInfo(request, gid):
     for i in range(0, len(group_name)):
         if group_name[i] != ' ':
             groupname += group_name[i]
-    print(groupname)
+    count = len(Users.objects.filter(groups__id=gid))
+    count = "x"*count
+    print(count)
     context = {
         'userlist' : Users.objects.filter(groups__id=gid),
         'groupowner' : owner.id,
@@ -24,6 +26,7 @@ def groupInfo(request, gid):
         'groupid' : gid,
         'group_name': group_name,
         'groupname' : groupname,
+        'count' : count,
     }
     return render(request, 'group_info.html', context)
 def editGroup(request, gid):

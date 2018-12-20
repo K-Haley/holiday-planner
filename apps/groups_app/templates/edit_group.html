@@ -12,7 +12,7 @@
     .list-group2{
         margin: 0px;
         padding: 0px;
-
+        box-shadow: 10px 10px 5px grey;
         width: 400px;
         display: inline-block;
     }
@@ -20,6 +20,31 @@
         text-align: center;
         margin: 0px;
         padding: 0px;
+    }
+    #searchresults{
+        z-index: 5;
+        position: absolute;
+        left: 79.5px;
+        background-color: white;
+        max-height: 200px;
+        width: 178.5px;
+
+    }
+    .searchitem{
+        border: 1px solid black;
+        height: 27px;
+        margin: 0px;
+    }
+    .list-group-item{
+        background-color: #2a601f5c;
+        color: black;
+
+    }
+    .mb-1, small{
+        color: black;
+    }
+    .namelink{
+        color: black;
     }
 </style>
 </head>
@@ -31,30 +56,18 @@
 
         <h1>Edit the {{group_name}} group here, {{request.session.name}}</h1>
         <div class="list-group1">
-            <ul class="list-group2">
-                {% if request.session.id == groupowner %}
+            {% if request.session.id == groupowner %}
                 <a class="green" href="/group/{{groupid}}/delete">Delete Group</a>
                 <a class="red" href="/group/{{groupid}}">Stop Editing</a>
+                <p></p>
                 {% endif %}
+            <ul class="list-group2">
+                
                 {% for i in userlist %}
                 <li class="list-group-item">{{i.first_name}} {{i.last_name}} <a href="/group/{{groupid}}/{{i.id}}"></a><a class="red" href="/group/{{groupid}}/{{i.id}}/remove/">Remove</a></li>
                 {% endfor %}
             </ul>
           </div>
-          <div class="list-group1">
-            <div class="list-group2">
-            {% for j in eventlist %}
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{j.event_name}}</h5>
-                    <small>{{j.date}} {{j.time}}</small>
-                  </div>
-                  <p class="mb-1">{{j.desc}}</p>
-                  <small></a></small>
-                </a>
-            {% endfor %}
-            </div>
-              </div>
 	</div>
 </body>
 </html>
