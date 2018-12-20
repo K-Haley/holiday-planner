@@ -53,7 +53,6 @@
 				<p></p>
 			{% endfor %}
 		</div>
-<<<<<<< HEAD
 				<h3>My Messages</h3>
 				<div class="pmessages">
 				{% for i, j in mymessages %}
@@ -77,34 +76,5 @@
 				{% endfor %}
 				</div>
 		</div>
-=======
-		<div class="primessages">
-			<h3>My Messages</h3>
-			<div class="overflow">
-			{% for i in mymessages %}
-				<div class="content">
-					<span>{{i.posted_by.first_name}} {{i.posted_by.last_name}}</span> <small> {{i.created_at.date}}</small>
-					<p></p>
-					<span>{{i.message}}</span>
-					<p></p>
-				</div>
-			{% endfor %}
-		</div>
-		</div>
-		<div class="sentmessages">
-				<h3>Sent Messages</h3>
-				<div class="overflow">
-				{% for i in sentmessages %}
-					<div class="content">
-						<span>{{i.sent_to.first_name}} {{i.sent_to.last_name}}</span> <small> {{i.created_at.date}}</small>
-						<p></p>
-						<span>{{i.message}}</span>
-						<p></p>
-					</div>
-				{% endfor %}
-				</div>
-			</div>
-	</div>
->>>>>>> 8757bbda85b3b664b67f3b44a54c7975c5339f95
 </body>
 </html>
