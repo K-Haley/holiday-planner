@@ -11,4 +11,5 @@ urlpatterns = [
     path('<int:gid>/<int:uid>/', views.groupOneUser),
     path('<int:gid>/<int:uid>/take/<int:iid>', views.take),
     path('<int:gid>/<int:uid>/remove/', views.removeUser),
+    path('search', views.searchUsers),
 ]

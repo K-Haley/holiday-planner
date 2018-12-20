@@ -77,3 +77,15 @@ def deleteGroup(request, gid):
     this_group = Groups.objects.get(id=gid)
     this_group.delete()
     return redirect('/home')
+def searchUsers(request):
+    if request.POST['inviteuser'] == '':
+        usersearch = Users.objects.filter(user_name__startswith='ksjflfdfs342643#%@*&#%(lgdgljd')
+        context = {
+            'user_search' : usersearch,
+        }
+        return render(request, 'user_search.html', context)
+    usersearch = Users.objects.filter(user_name__startswith=request.POST['inviteuser'])
+    context = {
+        'user_search' : usersearch,
+    }
+    return render(request, 'user_search.html', context)
