@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Users, Items
 import bcrypt
+from datetime import datetime, timezone, timedelta
 from django.apps import apps
 Groups = apps.get_model('groups_app', 'Groups')
 Events = apps.get_model('events_app', 'Events')
@@ -47,12 +48,36 @@ def home(request):
 		myevents = Events.objects.filter(groupid__members=Users.objects.get(id=request.session['id']))
 		mymessages = PMessages.objects.filter(sent_to=Users.objects.get(id=request.session['id'])).order_by('-created_at')
 		sentmessages = PMessages.objects.filter(posted_by=Users.objects.get(id=request.session['id'])).order_by('-created_at')
+		timeSinceMy = []
+		for i in mymessages:
+			j = datetime.now(timezone.utc) - i.created_at
+			if j.days > .99999999:
+				j = f'{round(j.days)} days(s)'
+			elif j.seconds/3600 > 1:
+				j = f'{round(j.seconds/3600)} hour(s)'
+			else:
+				j = f'{round(j.seconds/60)} minute(s)'
+			timeSinceMy.append(j)
+		timeSinceSent = []
+		for x in sentmessages:
+			y = datetime.now(timezone.utc) - x.created_at
+			if y.days > .99999999:
+				y = f'{round(y.days)} days(s)'
+			elif y.seconds/3600 > 1:
+				y = f'{round(y.seconds/3600)} hour(s)'
+			else:
+				y = f'{round(y.seconds/60)} minute(s)'
+			timeSinceSent.append(y)
+		my_messages = zip(mymessages,timeSinceMy)
+		sent_messages = zip(sentmessages,timeSinceSent)
+		print("*********************************************************")
+		print(my_messages)
 		context={
 			"mylist": mylist,
 			"mygroups": mygroups,
 			"myevents": myevents,
-			"mymessages" : mymessages,
-			"sentmessages" : sentmessages,
+			"mymessages" : my_messages,
+			"sentmessages" : sent_messages,
 		}
 		return render(request, 'login_app/home.html', context)
 	else:

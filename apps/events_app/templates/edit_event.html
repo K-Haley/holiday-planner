@@ -19,20 +19,20 @@
 		<form action="/group/{{groupid}}/events/{{eventinfo.id}}/update" method="post">
 		{% csrf_token %}
 		<p class="green">Name:</p>
-		<input type="text" name="eventname" value="{{eventinfo.event_name}}">
+		<input class="textinputeffects" type="text" name="eventname" value="{{eventinfo.event_name}}">
 		<p class="red">Date:</p>
-		<input type="date" name="eventdate" value="{{eventdate}}">
+		<input class="textinputeffects" type="date" name="eventdate" value="{{eventdate}}">
 		<p class="green">Time:</p>
-		<input type="time" name="eventtime" value="{{eventtime}}">
+		<input class="textinputeffects" type="time" name="eventtime" value="{{eventtime}}">
 		<p class="green">Location:</p>
-		<input type="text" name="eventlocation" value="{{eventlocation}}">
+		<input class="textinputeffects" type="text" name="eventlocation" value="{{eventlocation}}">
 		<p class="red">Description:</p>
 		<textarea name="eventdesc" cols="30" rows="10">{{eventinfo.desc}}</textarea>
 		<br>
 		<label class="green" for="hasfood">Are people bringing food?</label>
 		<input type="checkbox" name="hasfood" {% if eventinfo.has_food == True %}checked{% endif %}>
 		<br>
-		<input type="submit" value="Edit Event">
+		<input class="submiteffects" type="submit" value="Edit Event">
 		</form>
 	{% if messages %}
     	{% for message in messages %}

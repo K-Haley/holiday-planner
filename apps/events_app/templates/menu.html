@@ -22,16 +22,16 @@
         {% if thisevent.has_food == True %}
         <form action="/group/{{groupid}}/events/{{eventid}}/menu/add" method="post">
             {% csrf_token %}
-            <input type="text" name="foodname">
+            <input class="textinputeffects" type="text" name="foodname">
             <p></p>
-            <input type="submit" value="Add Item">
+            <input class="submiteffects" type="submit" value="Add Item">
         </form>
         {% elif thisevent.created_by.id == request.session.id %}
         <form action="/group/{{groupid}}/events/{{eventid}}/menu/add" method="post">
             {% csrf_token %}
-            <input type="text" name="foodname">
+            <input class="textinputeffects" type="text" name="foodname">
             <p></p>
-            <input type="submit" value="Add Item">
+            <input class="submiteffects" type="submit" value="Add Item">
         </form>
         {% endif %}
         <p></p>

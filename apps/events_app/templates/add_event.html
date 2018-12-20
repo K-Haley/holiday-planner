@@ -19,20 +19,21 @@
 		<form action="/group/{{groupid}}/events/create" method="post">
 		{% csrf_token %}
 		<p class="green">Name:</p>
-		<input type="text" name="eventname">
+		<input class="textinputeffects" type="text" name="eventname">
 		<p class="red">Date:</p>
-		<input type="date" name="eventdate">
+		<input class="textinputeffects" type="date" name="eventdate">
 		<p class="green">Time:</p>
-		<input type="time" name="eventtime">
+		<input class="textinputeffects" type="time" name="eventtime">
 		<p class="green">Location:</p>
-		<input type="text" name="eventlocation">
+		<input class="textinputeffects" type="text" name="eventlocation">
 		<p class="red">Description:</p>
 		<textarea name="eventdesc" cols="30" rows="10"></textarea>
 		<br>
 		<label class="green" for="hasfood">Are people bringing food?</label>
-		<input type="checkbox" name="hasfood">
 		<br>
-		<input type="submit" value="Create Event">
+		<input class="checkbox" type="checkbox" name="hasfood">
+		<br>
+		<input class="submiteffects" type="submit" value="Create Event">
 		</form>
 	{% if messages %}
     	{% for message in messages %}

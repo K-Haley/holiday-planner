@@ -20,12 +20,12 @@
 h1, .red{
 	color: red;
 	font-weight: bold;
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 2px black;
 }
 h3, .green, .untaken{
 	color: green;
 	font-weight: bold;
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 2px black;
 }
 body { 
 	background: url('snow.jpg') no-repeat center center fixed; 
@@ -54,8 +54,9 @@ span{
 }
 .black{
 	text-decoration: none;
-	color: black;
+	color: white;
 	font-weight: bold;
+	text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px black;
 }
 .taken{
     text-decoration: line-through;
@@ -77,5 +78,62 @@ span{
 .info{
 	font-weight: bold;
 }
-
-
+textarea{
+	background-image: linear-gradient(rgba(255,255,255,0.5), rgba(111,135,173,0.5));
+	background-color: transparent;
+	border: 1px solid gray;
+	border-radius: 20px;
+	box-shadow: 5px 5px 8px grey;
+	color: white;
+	text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px black;
+	caret-color: black;
+	padding: 5px;
+}
+.textinputeffects{
+	background-image: linear-gradient(rgba(255,255,255,0.5), rgba(111,135,173,0.5));
+	background-color: transparent;
+	border: 1px solid gray;
+	border-radius: 10px;
+	box-shadow: 3px 3px 8px grey;
+	color: white;
+	text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px black;
+	caret-color: black;
+	padding: 5px;
+}
+.submiteffects{
+	background-image: linear-gradient(rgba(255,255,255,0.5), rgba(111,135,173,0.5));
+	background-color: transparent;
+	border: 1px solid black;
+	border-radius: 10px;
+	box-shadow: 3px 3px 8px grey;
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px black;
+}
+.submiteffects:hover{
+	box-shadow: 6px 6px 16px grey;
+}
+input:focus{
+	outline:none;
+}
+textarea:focus{
+	outline:none;
+}
+.textinputeffects:-webkit-autofill {
+    -webkit-text-fill-color: white;
+}
+.checkbox{
+	height: 20px;
+	width: 20px;
+}
+.pmessages{
+	height: 250px;
+	width: 350px;
+	word-wrap: break-word;
+	display: inline-block;
+}
+.messageborder{
+	border: 1px solid black;
+	border-radius: 10px;
+}

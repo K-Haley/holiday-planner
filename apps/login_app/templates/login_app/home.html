@@ -40,24 +40,28 @@
 				<p></p>
 			{% endfor %}
 		</div>
-		<div class="primessages">
-			<h3>My Messages</h3>
-			{% for i in mymessages %}
-				<span>{{i.posted_by.first_name}} {{i.posted_by.last_name}}</span>
-				<p></p>
-				<span>{{i.message}}</span>
-				<p></p>
-			{% endfor %}
-		</div>
-		<div class="sentmessages">
-				<h3>Sent Messages</h3>
-				{% for i in sentmessages %}
-					<span>{{i.sent_to.first_name}} {{i.sent_to.last_name}}</span>
+				<h3>My Messages</h3>
+				<div class="pmessages">
+				{% for i, j in mymessages %}
+					<div class="messageborder">
+					<span>{{i.posted_by.first_name}} {{i.posted_by.last_name}}</span> - <small>{{j}} ago</small>
 					<p></p>
 					<span>{{i.message}}</span>
 					<p></p>
+					</div>
 				{% endfor %}
-			</div>
-	</div>
+				</div>
+				<h3>Sent Messages</h3>
+				<div class="pmessages">
+				{% for i, j in sentmessages %}
+					<div class="messageborder">
+					<span>{{i.sent_to.first_name}} {{i.sent_to.last_name}}</span> - <small>{{j}} ago</small>
+					<p></p>
+					<span>{{i.message}}</span>
+					<p></p>
+					</div>
+				{% endfor %}
+				</div>
+		</div>
 </body>
 </html>

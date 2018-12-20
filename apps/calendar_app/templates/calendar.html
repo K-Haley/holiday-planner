@@ -42,7 +42,7 @@
                 <p>{{i}}</p>
                 {% for k in myevents %}
                     {% if k.date == i %}
-                    <a class="green" href="/group/{{k.groupid.id}}/events/{{k.id}}">{{k.event_name}}</a>
+                    <a class="black" href="/group/{{k.groupid.id}}/events/{{k.id}}">{{k.event_name}}</a>
                     {% endif %}
                 {% endfor %}
             </div>

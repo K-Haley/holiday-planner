@@ -28,9 +28,9 @@
 		{% endfor %}
 		<form action="/add" method="POST">
 			{% csrf_token %}
-			Add to your list<input type="text" name="item">
+			<p class="green">Add to your list</p><input class="textinputeffects" type="text" name="item">
 			<input type="hidden" name="userid" value="{{request.session.id}}">
-			<button type="submit">add</button>
+			<button class="submiteffects" type="submit">Add</button>
 		</form>
 	</div>
 </body>
