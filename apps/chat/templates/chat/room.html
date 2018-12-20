@@ -18,6 +18,8 @@
         <input id="chat-message-input" type="text" size="100"/><br/>
         <input id="chat-message-submit" type="button" value="Send"/>
         <input id="name" type="hidden" name="name" value="{{user}}: ">
+        <input id="joinname" type="hidden" name="name" value="{{user}} joined the room ">
+        <input id="leftname" type="hidden" name="name" value="{{user}} left the room ">
     </div>
 </body>
 
@@ -36,6 +38,26 @@
 
     chatSocket.onclose = function(e) {
         console.error('Chat socket closed unexpectedly');
+        
+    };
+    window.onbeforeunload =function(e) {
+        var leftmessagedom = document.querySelector('#leftname');
+        var leftmessage = leftmessagedom.value
+        chatSocket.send(JSON.stringify({
+            'message': leftmessage
+
+        }));
+
+    }
+
+    chatSocket.onopen = function(e) {
+        
+        var openmessagedom = document.querySelector('#joinname');
+        var openmessage = openmessagedom.value
+        chatSocket.send(JSON.stringify({
+            'message': openmessage
+
+        }));
     };
 
     document.querySelector('#chat-message-input').focus();
