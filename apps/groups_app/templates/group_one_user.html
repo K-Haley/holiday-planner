@@ -36,7 +36,17 @@
         {% endif %}
         {% endfor %}
         <br>
+        <form action="/group/{{groupid}}/{{userid}}/sendmessage" method="post">
+        {% csrf_token %}
+        <input type="text" name="messagetext">
+        <input type="submit" value="Send private message!">
+        </form>
         <a href="/group/{{groupid}}">Back to Group</a>
+    {% if messages %}
+    	{% for message in messages %}
+        	<p class="message">{{ message }}</p>
+    	{% endfor %}
+	{% endif %}
 	</div>
 </body>
 </html>

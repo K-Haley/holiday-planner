@@ -18,6 +18,8 @@ class ValidateEvents(models.Manager):
                     errors["eventdate"] = "Your event must be in the future"
             if postData['eventtime'] == '':
                 errors["eventtime"] = "You must enter a time for the event"
+            if len(postData['eventlocation']) < 5:
+                errors["eventlocation"] = "You must enter a valid location for the event"
         if 'foodname' in postData:
              if len(postData['foodname']) < 2:
                 errors["foodname"] = "The item's names must contain at least 2 characters"
@@ -27,6 +29,7 @@ class Events(models.Model):
     event_name = models.CharField(max_length=255)
     date = models.DateField()
     time = models.TimeField()
+    location = models.CharField(max_length=255)
     desc = models.TextField(max_length=1000)
     has_food = models.BooleanField(default=False)
     groupid = models.ForeignKey('groups_app.Groups', on_delete=models.CASCADE)

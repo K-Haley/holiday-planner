@@ -5,6 +5,7 @@ import bcrypt
 from django.apps import apps
 Groups = apps.get_model('groups_app', 'Groups')
 Events = apps.get_model('events_app', 'Events')
+PMessages = apps.get_model('groups_app', 'PMessages')
 
 def index(request):
 	return render(request, 'login_app/index.html')
@@ -44,10 +45,14 @@ def home(request):
 		mygroups = Groups.objects.filter(members=request.session['id'])
 		print(mygroups)
 		myevents = Events.objects.filter(groupid__members=Users.objects.get(id=request.session['id']))
+		mymessages = PMessages.objects.filter(sent_to=Users.objects.get(id=request.session['id'])).order_by('-created_at')
+		sentmessages = PMessages.objects.filter(posted_by=Users.objects.get(id=request.session['id'])).order_by('-created_at')
 		context={
 			"mylist": mylist,
 			"mygroups": mygroups,
 			"myevents": myevents,
+			"mymessages" : mymessages,
+			"sentmessages" : sentmessages,
 		}
 		return render(request, 'login_app/home.html', context)
 	else:

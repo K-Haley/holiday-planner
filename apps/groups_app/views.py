@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Groups
+from .models import Groups, PMessages
 from django.apps import apps
 from django.contrib import messages
 Users = apps.get_model('login_app', 'Users')
@@ -89,3 +89,12 @@ def searchUsers(request):
         'user_search' : usersearch,
     }
     return render(request, 'user_search.html', context)
+def sendMessage(request, gid, uid):
+    errors = Groups.objects.validateGroups(request.POST)
+    if len(errors) > 0:
+	    for key, value in errors.items():
+		    messages.error(request, value)
+		    return redirect(f'/group/{gid}/{uid}')
+    PMessages.objects.create(message=request.POST['messagetext'], posted_by=Users.objects.get(id=request.session['id']), sent_to=Users.objects.get(id=uid))
+    messages.success(request, 'Message sent!')
+    return redirect(f'/group/{gid}/{uid}')

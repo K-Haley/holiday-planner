@@ -9,6 +9,9 @@ class ValidateGroups(models.Manager):
             if postData['groupdesc'] != '':
                 if len(postData['groupdesc']) < 10:
                     errors["groupdesc"] = "If included, a description must be at least 10 characters"
+        if 'messagetext' in postData:
+            if len(postData['messagetext']) < 1:
+                errors["messagetext"] = "Your message must contain at least 1 character"
         return errors
 
 class Groups(models.Model):
@@ -20,9 +23,10 @@ class Groups(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = ValidateGroups()
 
-class Messages(models.Model):
+class PMessages(models.Model):
     message = models.CharField(max_length=255)
     posted_by = models.ForeignKey('login_app.Users', on_delete=models.CASCADE)
-    groupid = models.ForeignKey(Groups, on_delete=models.CASCADE)
+    sent_to = models.ForeignKey('login_app.Users', on_delete=models.CASCADE, related_name='sent_to')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = ValidateGroups()

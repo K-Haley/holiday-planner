@@ -26,7 +26,7 @@ def createEvent(request, gid):
 	    for key, value in errors.items():
 		    messages.error(request, value)
 		    return redirect(f'/group/{gid}/events/add')
-    this_event = Events.objects.create(event_name=request.POST['eventname'], date=request.POST['eventdate'], time=request.POST['eventtime'], desc=request.POST['eventdesc'],groupid=Groups.objects.get(id=gid),created_by=Users.objects.get(id=request.session['id']))
+    this_event = Events.objects.create(event_name=request.POST['eventname'], date=request.POST['eventdate'], time=request.POST['eventtime'], location=request.POST['eventlocation'], desc=request.POST['eventdesc'],groupid=Groups.objects.get(id=gid),created_by=Users.objects.get(id=request.session['id']))
     eid = this_event.id
     if 'hasfood' in request.POST:
         this_event.has_food = True
@@ -53,6 +53,7 @@ def updateEvent(request, gid, eid):
     this_event.event_name = request.POST['eventname']
     this_event.date = request.POST['eventdate']
     this_event.time = request.POST['eventtime']
+    this_event.location = request.POST['eventlocation']
     this_event.desc = request.POST['eventdesc']
     if 'hasfood' in request.POST:
         this_event.has_food = True

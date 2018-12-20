@@ -29,6 +29,7 @@
         <div class="infobox">
             <h3 class="green">Description</h3>
             <p class="info">{{thisevent.desc}}</p>
+            <a target="_blank" rel="noopener noreferrer" href="https://maps.google.com/?q={{thisevent.location}}" class="info">{{thisevent.location}}</a>
         </div>
         <p></p>
         {% if thisevent.created_by.id == request.session.id %}
