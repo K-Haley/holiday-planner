@@ -134,12 +134,16 @@ textarea:focus{
 	display: inline-block;
 	overflow: scroll;
 	border-top: 1px solid black;
-	border-bottom: : 1px solid black;
+	border-bottom: 1px solid black;
 	border-radius: 10px;
-
+	overflow-x: hidden;
 }
 .messageborder{
 	border: 1px solid black;
 	border-radius: 10px;
 	background-color: #2a601f5c;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }
