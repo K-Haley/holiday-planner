@@ -17,7 +17,7 @@
 
         <h1>View and add menu items here, {{request.session.name}}</h1>
         {% for i in menuitems %}
-        <p class="green">{{i.brought_by.first_name}} {{i.brought_by.last_name}} - {{i.food_item}}</p>
+        <p class="black">{{i.brought_by.first_name}} {{i.brought_by.last_name}} - {{i.food_item}}</p>
         {% endfor %}
         {% if thisevent.has_food == True %}
         <form action="/group/{{groupid}}/events/{{eventid}}/menu/add" method="post">
@@ -36,7 +36,7 @@
         {% endif %}
         <p></p>
         {% if thisevent.created_by.id == request.session.id %}
-        <a href="/group/{{groupid}}/events/{{eventid}}/menu/edit">Edit Menu</a>
+        <a class="green" href="/group/{{groupid}}/events/{{eventid}}/menu/edit">Edit Menu</a>
         {% endif %}
     {% if messages %}
     	{% for message in messages %}
