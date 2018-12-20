@@ -7,7 +7,20 @@
 	{% load static %}
 	<link rel="stylesheet" href="{% static 'homestyle.css' %}"> 
 	<style type="text/css">
-
+		.overflow{
+			overflow: scroll;
+			height: 200px;
+			background-color: #2a601f5c;
+			width: 500px;
+			text-align: center;
+			display: inline-block;
+			border-top: 1px solid black;
+			border-bottom: 1px solid black;
+			border-radius: 10px;
+		}
+		.content{
+			border: 1px solid black;
+		}
 	</style>
 </head>
 <body>
@@ -42,21 +55,29 @@
 		</div>
 		<div class="primessages">
 			<h3>My Messages</h3>
+			<div class="overflow">
 			{% for i in mymessages %}
-				<span>{{i.posted_by.first_name}} {{i.posted_by.last_name}}</span>
-				<p></p>
-				<span>{{i.message}}</span>
-				<p></p>
-			{% endfor %}
-		</div>
-		<div class="sentmessages">
-				<h3>Sent Messages</h3>
-				{% for i in sentmessages %}
-					<span>{{i.sent_to.first_name}} {{i.sent_to.last_name}}</span>
+				<div class="content">
+					<span>{{i.posted_by.first_name}} {{i.posted_by.last_name}}</span> <small> {{i.created_at.date}}</small>
 					<p></p>
 					<span>{{i.message}}</span>
 					<p></p>
+				</div>
+			{% endfor %}
+		</div>
+		</div>
+		<div class="sentmessages">
+				<h3>Sent Messages</h3>
+				<div class="overflow">
+				{% for i in sentmessages %}
+					<div class="content">
+						<span>{{i.sent_to.first_name}} {{i.sent_to.last_name}}</span> <small> {{i.created_at.date}}</small>
+						<p></p>
+						<span>{{i.message}}</span>
+						<p></p>
+					</div>
 				{% endfor %}
+				</div>
 			</div>
 	</div>
 </body>

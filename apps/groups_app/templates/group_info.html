@@ -11,14 +11,10 @@
     <link rel="stylesheet" href="{% static 'homestyle.css' %}">
     <script src="{% static 'search.js' %}"></script>
 <style>
-    /*.list-group{
-        width: 400px;
-        margin-left: 50px;
-    }*/
     .list-group2{
         margin: 0px;
         padding: 0px;
-
+        box-shadow: 7px 7px 10px grey;
         width: 400px;
         display: inline-block;
     }
@@ -34,11 +30,28 @@
         background-color: white;
         max-height: 200px;
         width: 178.5px;
+
     }
     .searchitem{
         border: 1px solid black;
         height: 27px;
         margin: 0px;
+    }
+    .list-group-item{
+        background-color: #2a601f5c;
+
+    }
+    .mb-1, small{
+        color: black;
+    }
+    .namelink{
+        color: black;
+    }
+    .chat{
+        margin-top: 10px;
+    }
+    .chat a{
+        font-size: 24px;
     }
 </style>
 </head>
@@ -48,21 +61,22 @@
             <a href="/home" class="green">Home</a> | <a href="/group/add" class="red">Create Group</a> | <a href="/mylist" class="green">My Wish List</a> | <a href="/calendar/{{request.session.id}}" class="red">My Calendar</a> | <a href="/logout" class="green">Logout</a>
         </div>
 
-        <h1>You are on the group info page, {{request.session.name}}</h1>
+        <h1>You are on the {{group_name}} info page, {{request.session.name}}</h1>
         <h4 class="green">{{description}}</h4>
         <div class="list-group1">
+            <a class="red" href="/group/{{groupid}}/edit">Edit Group</a>
+            <p></p>
             <ul class="list-group2">
-                {% if request.session.id == groupowner %}
-                <a class="green" href="/group/{{groupid}}/edit">Edit Group</a>
+                {% if request.session.id == groupowner %}          
                 {% endif %}
-                {% for i in userlist %}
-                <li class="list-group-item"><a href={% if i.id != request.session.id %}"/group/{{groupid}}/{{i.id}}"{% endif %}{% if request.session.id == i.id %}"/home"{% endif %}>{{i.first_name}} {{i.last_name}}</a> <a href="/group/{{groupid}}/{{i.id}}"></a></li>
+                {% for i in userlist %}   
+                    <li class="list-group-item"><a class="green"  href={% if i.id != request.session.id %}"/group/{{groupid}}/{{i.id}}"{% endif %}{% if request.session.id == i.id %}"/home"{% endif %}>{{i.first_name}} {{i.last_name}}</a> </li>
                 {% endfor %}
                 <li class="list-group-item"><form action="/group/{{groupid}}/invite" method="post" autocomplete=off id="inviteform">{% csrf_token %}<input type="text" name="inviteuser" id="invitebox"><div id="searchresults"></div></input><input type="submit" value="Invite!"></form></li>
             </ul>
           </div>
-          <h2>Events:</h2>
-          <a href="/group/{{groupid}}/events/add">Add Event</a>
+          <h2 class="green">Events:</h2>
+          <a class="red" href="/group/{{groupid}}/events/add">Add Event</a>
           <div class="list-group1">
                 <div class="list-group2">
                 {% for j in eventlist %}
@@ -77,7 +91,9 @@
                 {% endfor %}
                 </div>
             </div>
-            <a class="green" href="/chat/{{groupname}}">Chat with Group!</a>
+            <div class="chat">
+                <a class="green" href="/chat/{{groupname}}">Chat with Group!</a>
+            </div>
 	</div>
 </body>
 </html>
