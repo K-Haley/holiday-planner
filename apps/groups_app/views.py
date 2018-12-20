@@ -6,10 +6,16 @@ Users = apps.get_model('login_app', 'Users')
 Events = apps.get_model('events_app', 'Events')
 Items = apps.get_model('login_app', 'Items')
 
-def groupInfo(request, gid):
+def groupInfo(request, gid): 
     this_group = Groups.objects.get(id=gid)
     owner = this_group.group_owner
     group_name = this_group.group_name
+    request.session['group_name'] =group_name
+    groupname = ''
+    for i in range(0, len(group_name)):
+        if group_name[i] != ' ':
+            groupname += group_name[i]
+    print(groupname)
     context = {
         'userlist' : Users.objects.filter(groups__id=gid),
         'groupowner' : owner.id,
@@ -17,6 +23,7 @@ def groupInfo(request, gid):
         'eventlist' : Events.objects.filter(groupid__id=gid),
         'groupid' : gid,
         'group_name': group_name,
+        'groupname' : groupname,
     }
     return render(request, 'group_info.html', context)
 def editGroup(request, gid):

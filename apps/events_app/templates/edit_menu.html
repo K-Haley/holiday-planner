@@ -17,7 +17,7 @@
 
         <h1>View and add menu items here, {{request.session.name}}</h1>
         {% for i in menuitems %}
-        <p class="green">{{i.brought_by.first_name}} {{i.brought_by.last_name}} - {{i.food_item}} <a href="/group/{{groupid}}/events/{{eventid}}/menu/{{i.id}}/delete">Delete</a></p>
+        <p class="black">{{i.brought_by.first_name}} {{i.brought_by.last_name}} - {{i.food_item}} <a class="red" href="/group/{{groupid}}/events/{{eventid}}/menu/{{i.id}}/delete">Delete</a></p>
         {% endfor %}
         <form action="/group/{{groupid}}/events/{{eventid}}/menu/add" method="post">
             {% csrf_token %}
@@ -26,7 +26,7 @@
             <input type="submit" value="Add Item">
         </form>
         <p></p>
-        <a href="/group/{{groupid}}/events/{{eventid}}/menu">Stop Editing</a>
+        <a class="green" href="/group/{{groupid}}/events/{{eventid}}/menu">Stop Editing</a>
     {% if messages %}
     	{% for message in messages %}
         	<p class="message">{{ message }}</p>
