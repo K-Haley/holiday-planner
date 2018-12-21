@@ -64,13 +64,15 @@
         <h1>You are on the {{group_name}} info page, {{request.session.name}}</h1>
         <h4 class="green">{{description}}</h4>
         <div class="list-group1">
+            {% if request.session.id == groupowner %}
             <a class="red" href="/group/{{groupid}}/edit">Edit Group</a>
+            {% endif %}
             <p></p>
             <ul class="list-group2">
-                {% if request.session.id == groupowner %}          
-                {% endif %}
+                          
+                
                 {% for i in userlist %}   
-                    <li class="list-group-item"><a class="green"  href={% if i.id != request.session.id %}"/group/{{groupid}}/{{i.id}}"{% endif %}{% if request.session.id == i.id %}"/home"{% endif %}>{{i.first_name}} {{i.last_name}}</a> </li>
+                    <li class="list-group-item"><a class="black"  href={% if i.id != request.session.id %}"/group/{{groupid}}/{{i.id}}"{% endif %}{% if request.session.id == i.id %}"/home"{% endif %}>{{i.first_name}} {{i.last_name}}</a> </li>
                 {% endfor %}
                 <li class="list-group-item"><form action="/group/{{groupid}}/invite" method="post" autocomplete=off id="inviteform">{% csrf_token %}<input class="textinputeffects" type="text" name="inviteuser" id="invitebox"><div id="searchresults"></div></input><input class="submiteffects" type="submit" value="Invite!"></form></li>
             </ul>
